@@ -11,7 +11,7 @@ var parser = require('body-parser');
 var app = express();
 app.set("view engine", "ejs"); //include html file
 app.use(parser.urlencoded({extended: true}));   //parse data from html body 
-app.use(express.static(__dirname + "/public")); //include css file
+app.use(express.static(__dirname + "/style")); //include css file
 
 //build connection with mysql
 var connection = mysql.createConnection({
@@ -23,7 +23,7 @@ var connection = mysql.createConnection({
 
 //homepage
 app.get("/", function(req, res){
-	var q = "SELECT COUNT(*) AS count FROM users";
+	var q = "SELECT COUNT(*) AS count FROM members";
 	connection.query(q, function(error, results){
 		if (error) throw error;
 		res.render("home", {count: results[0].count}); //call the home.ejs file
@@ -34,9 +34,11 @@ app.get("/", function(req, res){
 app.post("/register", function(req, res){
 	var user = {
 		email: req.body.email, 
-		country: req.body.country
+		first_name: req.body.first_name,
+		gender: req.body.gender, 
+		age: req.body.age
 	};
-	connection.query("INSERT INTO users SET ?", user, function(error, results){
+	connection.query("INSERT INTO members SET ?", user, function(error, results){
 		if (error) throw error;
 		res.redirect("/"); //redirect to homepage after signing up
 	});
