@@ -19,7 +19,7 @@ function gen(){
 */
 
 // insert a specific number of fake data to join_us database
-var num_fake = 500;
+var num_fake = 266;
 var connection = mysql.createConnection({
 	host: 'localhost',
 	user: 'root', 
@@ -27,16 +27,18 @@ var connection = mysql.createConnection({
 	database: 'join_us'
 });
 
-var user_data = [];
+var member_data = [];
 for (var i = 0; i < num_fake; ++i){
-	user_data.push([
+	member_data.push([
 		faker.internet.email(), 
-		faker.address.country(), 
+		faker.name.firstName(),
+		faker.name.gender(), 
+		Math.floor(Math.random() * 100) + 5,
 		faker.date.past()]);
 }
 
-var q = 'INSERT INTO users (email, country, created_at) VALUES ?';
-connection.query(q, [user_data],  
+var q = 'INSERT INTO members (email, first_name, gender, age, created_at) VALUES ?';
+connection.query(q, [member_data],  
 	function(error, results, fields) {
 		if (error) throw error;
 		console.log(results);   //results[row#].colname
