@@ -1,9 +1,20 @@
-<h1> JOIN US</h1>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+    <link rel="stylesheet" href="/app.css">
+</head>
 
-<p>Enter your email to join <strong><%=count%></strong> others on our list. We are 100% not a cult</p>
-
-<form method="POST" action='/register'>
-	<input type="text" name="email" class="form" placeholder="Enter Your Email">
-	<input type="text" name="country" class="form" placeholder="Enter Your Country">
-	<button> Join Now</button>
-</form>
+<body>
+    <div class="flex-container">
+    <div class="container">
+        <h1>Join The Chinese Poetry Society Today!</h1>
+        <p class="lead">Register to become a member with <strong><%= count %></strong> others. </p>
+        <form method="POST" action='/register'>
+            <input type="text" class="form" name="email" placeholder="Email">
+            <input type="text" class="form" name="first_name" placeholder="Name (first)">
+            <input type="text" class="form" name="gender" placeholder="Gender">
+            <input type="number" class="form" name="age" placeholder="Age">
+            <button>Join Now</button>
+        </form>
+    </div>
+</div>
+</body>
