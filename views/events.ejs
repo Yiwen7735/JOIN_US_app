@@ -1,0 +1,24 @@
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">
+    <link rel="stylesheet" href="/events.css">
+</head>
+
+<body>
+    <div class="flex-container">
+    <div class="container">
+        <h1>Welcome!</h1>
+        <p class="lead">Please mark some events that interest you. </p>
+        <form method="POST" action='/mark_events'>
+            <label for="events">Choose a Event:</label>
+            <select style="line-height:1.0" id="events" name="events">
+                <option value="appre">Poetry Appreciation</option>
+                <option value="trip">Fieldtrip</option>
+                <option value="pal">Finding a Poem Pal</option>
+                <option value="learn">Learning How to Write Chinese Poem</option>
+            </select>
+            <button>Mark</button>
+        </form>
+        <p class="error"><%= err_msg %></p>
+    </div>
+</div>
+</body>
