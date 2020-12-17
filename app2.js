@@ -53,25 +53,23 @@ app.post("/register", function(req, res){
 		res.redirect("/err");
 		return ;
 	}
-
 	connection.query("INSERT INTO members SET ?", user, function(error, results){
 		if (error) throw error;
-		res.redirect("/activities") //redirect to activities page after signing up
+		res.redirect("/events") //redirect to activities page after signing up
 	});
 });
 
-app.get("/activities", function(req, res){
-	res.send("This is the activities page");
+app.get("/events", function(req, res){
+	var params = {err_msg: ""};
+	res.render("events", params);
 });
 	
 
-/*
-//testing
-app.get("/lucky_num", function(req, res){
-	var rnum = Math.floor(Math.random() * 10) + 1;
-	res.send("Your lucky number is " + rnum);
-})
-*/
+app.post("/mark_events", function(req, res){
+	res.send("Your event is marked");
+});
+
+
 http.createServer(app).listen(80);
 
 
