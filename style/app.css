@@ -51,6 +51,13 @@ button {
     opacity: 0.5;
 }
 
+.error{
+  text-align: center;
+  font-family: cursive;
+  font-size: 20px;
+  color: rgba(146, 43, 43, 1.0);
+}
+
 input[type=text]:focus {
   outline: none;
 }

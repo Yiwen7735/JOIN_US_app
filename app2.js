@@ -26,7 +26,17 @@ app.get("/", function(req, res){
 	var q = "SELECT COUNT(*) AS count FROM members";
 	connection.query(q, function(error, results){
 		if (error) throw error;
-		res.render("home", {count: results[0].count}); //call the home.ejs file
+		var params = {count: results[0].count, err_msg: ""};
+		res.render("home", params); //call the home.ejs file
+	});
+});
+
+app.get("/err", function(req, res){
+	var q = "SELECT COUNT(*) AS count FROM members";
+	connection.query(q, function(error, results){
+		if (error) throw error;
+		var params = {count: results[0].count, err_msg: "Space cannot be blank"};
+		res.render("home", params); //call the home.ejs file
 	});
 });
 
@@ -38,11 +48,22 @@ app.post("/register", function(req, res){
 		gender: req.body.gender, 
 		age: req.body.age
 	};
+	if (user.email === "" || user.first_name === "" || 
+		user.gender === "" || user.age === ""){
+		res.redirect("/err");
+		return ;
+	}
+
 	connection.query("INSERT INTO members SET ?", user, function(error, results){
 		if (error) throw error;
-		res.redirect("/"); //redirect to homepage after signing up
+		res.redirect("/activities") //redirect to activities page after signing up
 	});
 });
+
+app.get("/activities", function(req, res){
+	res.send("This is the activities page");
+});
+	
 
 /*
 //testing
