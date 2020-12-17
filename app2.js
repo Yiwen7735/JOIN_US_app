@@ -55,16 +55,11 @@ app.post("/register", function(req, res){
 	}
 	connection.query("INSERT INTO members SET ?", user, function(error, results){
 		if (error) throw error;
-		res.redirect("/events") //redirect to activities page after signing up
+		res.render("events")
 	});
 });
-
-app.get("/events", function(req, res){
-	var params = {err_msg: ""};
-	res.render("events", params);
-});
 	
-
+//TODO: ADD THE QUERY FOR EVENT COL LATER
 app.post("/mark_events", function(req, res){
 	res.send("Your event is marked");
 });
