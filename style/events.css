@@ -1,0 +1,68 @@
+body {
+    font-family: cursive;
+    text-align: center;
+    text-shadow: 0 .05rem .1rem rgba(0,0,0,.5);
+    color: rgba(255,255,255,0.7);
+    background-image: url('https://imgur.com/iUTiIxY.jpg'); 
+    background-size: cover;
+    font-weight: 100;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 80%;
+}
+
+h1{
+  margin-bottom: 160px;
+  font-size: 60px;
+  line-height: 150px;
+  font-weight: 90;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 30px;
+}
+
+form {
+  font-family: cursive;
+	font-size: 20px;
+	padding: 5px 10px;
+	background: transparent;
+}
+
+button {
+    font-family: cursive;
+    line-height: 1.0;
+    border:3px solid white;
+    font-size: 20px;
+    color: rgb(66,69,86);
+    padding: 5px 30px;
+    background: rgba(255,255,255,1.0);
+    border-radius: 5px;
+    opacity: 0.5;
+}
+
+select {
+  height: 100%;
+  line-height: 1.0;
+}
+
+.error{
+  text-align: center;
+  font-family: cursive;
+  font-size: 24px;
+  color: #943126;
+}
+
+input[type=text]:focus {
+  outline: none;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgba(255,255,255,0.8);
+}

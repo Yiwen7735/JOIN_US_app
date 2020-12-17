@@ -32,7 +32,7 @@ p {
 	line-height: 2.0;
 	border: none;
 	border-bottom: 3px solid #AEB6BF;
-	margin-top: 120px;
+	margin-top: 140px;
 	width: 200px;
 	font-size: 20px;
 	padding: 5px 10px;
@@ -54,8 +54,8 @@ button {
 .error{
   text-align: center;
   font-family: cursive;
-  font-size: 20px;
-  color: rgba(146, 43, 43, 1.0);
+  font-size: 24px;
+  color: #943126;
 }
 
 input[type=text]:focus {
