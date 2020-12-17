@@ -10,7 +10,7 @@
         <p class="lead">Please mark some events that interest you. </p>
         <form method="POST" action='/mark_events'>
             <label for="events">Choose a Event:</label>
-            <select style="line-height:1.0" id="events" name="events">
+            <select id="events" name="events">
                 <option value="appre">Poetry Appreciation</option>
                 <option value="trip">Fieldtrip</option>
                 <option value="pal">Finding a Poem Pal</option>
@@ -18,7 +18,6 @@
             </select>
             <button>Mark</button>
         </form>
-        <p class="error"><%= err_msg %></p>
     </div>
 </div>
 </body>

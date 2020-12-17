@@ -48,15 +48,7 @@ button {
 }
 
 select {
-  height: 100%;
   line-height: 1.0;
-}
-
-.error{
-  text-align: center;
-  font-family: cursive;
-  font-size: 24px;
-  color: #943126;
 }
 
 input[type=text]:focus {
