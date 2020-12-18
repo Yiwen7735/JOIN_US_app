@@ -7,15 +7,29 @@
     <div class="flex-container">
     <div class="container">
         <h1>Welcome!</h1>
-        <p class="lead">Please mark some events that interest you. </p>
-        <form method="POST" action='/mark_events'>
-            <label for="events">Choose a Event:</label>
-            <select id="events" name="events">
-                <option value="appre">Poetry Appreciation</option>
-                <option value="trip">Fieldtrip</option>
-                <option value="pal">Finding a Poem Pal</option>
-                <option value="learn">Learning How to Write Chinese Poem</option>
-            </select>
+        <p class="lead">Please mark the events that interest you. </p>
+        <br/><br/><br/><br/><br/>
+        <form method="POST" action='/events_marked'>
+            <label style="font-size:20px" for="appr">Poetry Appreciation (marked by <strong><%= count_appr %></strong>):</label>
+                <select id="events" name="events">
+                <option value="yes">I am interested</option>
+                <option value="no">No thanks</option>
+                </select><br/><br/>
+            <label style="font-size:20px" or="trip">Fieldship for Inspirations (marked by <strong><%= count_trip %></strong>)</label>
+                <select id="events" name="events">
+                <option value="yes">I am interested</option>
+                <option value="no">No thanks</option>
+                </select><br/><br/>
+            <label style="font-size:20px" for="pal">Finding a Poem Pal (marked by <strong><%= count_pal %></strong>)</label>
+                <select id="events" name="events">
+                <option value="yes">I am interested</option>
+                <option value="no">No thanks</option>
+                </select><br/><br/>
+            <label style="font-size:20px" for="learn">Learning to Write Chinese Poem (marked by <strong><%= count_learn %></strong>)</label>
+                <select id="events" name="events">
+                <option value="yes">I am interested</option>
+                <option value="no">No thanks</option>
+                </select><br/><br/>
             <button>Mark</button>
         </form>
     </div>
