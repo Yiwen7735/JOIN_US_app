@@ -18,52 +18,78 @@ var connection = mysql.createConnection({
 	host: 'localhost',
 	user: 'root', 
 	password: process.env.mysql_pw, 
-	database: 'join_us'
+	database: 'join_us', 
+	multipleStatements: true
 });
 
 //homepage
 app.get("/", function(req, res){
-	var q = "SELECT COUNT(*) AS count FROM members";
-	connection.query(q, function(error, results){
+	connection.query("SELECT COUNT(*) AS count FROM members;", 
+		function(error, results){
 		if (error) throw error;
-		var params = {count: results[0].count, err_msg: ""};
-		res.render("home", params); //call the home.ejs file
+		res.render("home", {count: results[0].count, err_msg: ""}); //call the home.ejs file
 	});
 });
 
-app.get("/err", function(req, res){
-	var q = "SELECT COUNT(*) AS count FROM members";
-	connection.query(q, function(error, results){
+app.get("/err_blk", function(req, res){
+	connection.query("SELECT COUNT(*) AS count FROM members;", 
+		function(error, results){
 		if (error) throw error;
-		var params = {count: results[0].count, err_msg: "Space cannot be blank"};
-		res.render("home", params); //call the home.ejs file
+		res.render("home", {count: results[0].count, err_msg: "Space cannot be blank"});
+	});
+});
+
+app.get("/err_dup", function(req, res){
+	connection.query("SELECT COUNT(*) AS count FROM members;", 
+		function(error, results){
+		if (error) throw error;
+		res.render("home", {count: results[0].count, err_msg: "Email already exists"});
 	});
 });
 
 //post register
 app.post("/register", function(req, res){
-	var user = {
+	var member = {
 		email: req.body.email, 
 		first_name: req.body.first_name,
-		gender: req.body.gender, 
 		age: req.body.age
 	};
-	if (user.email === "" || user.first_name === "" || 
-		user.gender === "" || user.age === ""){
-		res.redirect("/err");
-		return ;
-	}
-	connection.query("INSERT INTO members SET ?", user, function(error, results){
-		if (error) throw error;
-		res.render("events")
+
+	//go to err_blk page if some blanks are not filled
+	if (member.email === "" || member.first_name === "" || member.age === "")
+		res.redirect("/err_blk");
+
+	//insert new member info to join_us database
+	connection.query("INSERT INTO members SET ?", member, function(error, results){
+		 //if duplicate email, go to err_dup page
+		if (error && error.errno === 1062) 
+			res.redirect("/err_dup"); 
+		//else, let the newly joined member mark some events
+		var q = "SELECT COUNT(*) AS count_appr FROM members WHERE event_appr=1;";
+		q += "SELECT COUNT(*) AS count_trip FROM members WHERE event_trip=1;";
+		q += "SELECT COUNT(*) AS count_pal FROM members WHERE event_pal=1;";
+		q += "SELECT COUNT(*) AS count_learn FROM members WHERE event_learn=1;";
+		connection.query(q, function(error, results){
+			if (error) throw error;
+			var params = {
+				count_appr: results[0][0].count_appr, 
+				count_trip: results[1][0].count_trip, 
+				count_pal: results[2][0].count_pal, 
+				count_learn: results[3][0].count_learn
+			}
+			res.render("events", params);
+		});
 	});
 });
-	
-//TODO: ADD THE QUERY FOR EVENT COL LATER
-app.post("/mark_events", function(req, res){
-	res.send("Your event is marked");
-});
 
+//TODO: ADD COOKIES TO LOCATE personal info with events marked
+// 		UPDATE join_us db events_ col for new member
+//      END page: "Thanks for signing up, hope to see you in future events"
+//                - with an option to go back to homepage
+    
+app.post("/events_marked", function(req, res){
+	res.redirect("/");
+});
 
 http.createServer(app).listen(80);
 
