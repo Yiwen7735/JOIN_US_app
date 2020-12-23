@@ -7,11 +7,13 @@ var mysql = require('mysql');
 var express = require('express'); 
 var http = require('http');      
 var parser = require('body-parser');
+var cookieParser = require("cookie-parser");
 
 var app = express();
 app.set("view engine", "ejs"); //include html file
 app.use(parser.urlencoded({extended: true}));   //parse data from html body 
-app.use(express.static(__dirname + "/style")); //include css file
+app.use(express.static(__dirname + "/style"));  //include css file
+app.use(cookieParser());  //use cookie parser
 
 //build connection with mysql
 var connection = mysql.createConnection({
@@ -23,7 +25,7 @@ var connection = mysql.createConnection({
 });
 
 //homepage
-app.get("/", function(req, res){
+app.get("/register", function(req, res){
 	connection.query("SELECT COUNT(*) AS count FROM members;", 
 		function(error, results){
 		if (error) throw error;
@@ -31,7 +33,7 @@ app.get("/", function(req, res){
 	});
 });
 
-app.get("/err_blk", function(req, res){
+app.get("/register_error1", function(req, res){
 	connection.query("SELECT COUNT(*) AS count FROM members;", 
 		function(error, results){
 		if (error) throw error;
@@ -39,7 +41,7 @@ app.get("/err_blk", function(req, res){
 	});
 });
 
-app.get("/err_dup", function(req, res){
+app.get("/register_error2", function(req, res){
 	connection.query("SELECT COUNT(*) AS count FROM members;", 
 		function(error, results){
 		if (error) throw error;
@@ -48,7 +50,7 @@ app.get("/err_dup", function(req, res){
 });
 
 //post register
-app.post("/register", function(req, res){
+app.post("/register_events", function(req, res){
 	var member = {
 		email: req.body.email, 
 		first_name: req.body.first_name,
@@ -57,13 +59,15 @@ app.post("/register", function(req, res){
 
 	//go to err_blk page if some blanks are not filled
 	if (member.email === "" || member.first_name === "" || member.age === "")
-		res.redirect("/err_blk");
+		res.redirect("/register_error1");
 
 	//insert new member info to join_us database
 	connection.query("INSERT INTO members SET ?", member, function(error, results){
+
 		 //if duplicate email, go to err_dup page
 		if (error && error.errno === 1062) 
-			res.redirect("/err_dup"); 
+			res.redirect("/register_error2"); 
+
 		//else, let the newly joined member mark some events
 		var q = "SELECT COUNT(*) AS count_appr FROM members WHERE event_appr=1;";
 		q += "SELECT COUNT(*) AS count_trip FROM members WHERE event_trip=1;";
@@ -75,20 +79,34 @@ app.post("/register", function(req, res){
 				count_appr: results[0][0].count_appr, 
 				count_trip: results[1][0].count_trip, 
 				count_pal: results[2][0].count_pal, 
-				count_learn: results[3][0].count_learn
+				count_learn: results[3][0].count_learn, 
 			}
 			res.render("events", params);
 		});
 	});
-});
 
-//TODO: ADD COOKIES TO LOCATE personal info with events marked
-// 		UPDATE join_us db events_ col for new member
-//      END page: "Thanks for signing up, hope to see you in future events"
-//                - with an option to go back to homepage
-    
-app.post("/events_marked", function(req, res){
-	res.redirect("/");
+
+	//store the events selected by members into members table
+	app.post("/register_complete", function(req, res){
+		events = {
+			event_appr: req.body.appr, 
+			event_trip: req.body.trip, 
+			event_pal: req.body.pal,
+			event_learn: req.body.learn
+		};
+
+		var qevent = `UPDATE members SET ? WHERE email = '${member.email}'`;
+		connection.query(qevent, events, function(error, results){
+			if (error) throw error;
+			res.render("complete");
+		});
+		
+	});
+
+	app.post("/register", function(req, res){
+		res.redirect("/register");
+	})
+
 });
 
 http.createServer(app).listen(80);
