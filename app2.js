@@ -24,7 +24,7 @@ var connection = mysql.createConnection({
 	multipleStatements: true
 });
 
-//homepage
+//homepage - register
 app.get("/register", function(req, res){
 	connection.query("SELECT COUNT(*) AS count FROM members;", 
 		function(error, results){
@@ -49,6 +49,7 @@ app.get("/register_error2", function(req, res){
 	});
 });
 
+var primary_key;
 //post register
 app.post("/register_events", function(req, res){
 	var member = {
@@ -56,6 +57,7 @@ app.post("/register_events", function(req, res){
 		first_name: req.body.first_name,
 		age: req.body.age
 	};
+	primary_key = member.email;
 
 	//go to err_blk page if some blanks are not filled
 	if (member.email === "" || member.first_name === "" || member.age === "")
@@ -84,30 +86,29 @@ app.post("/register_events", function(req, res){
 			res.render("events", params);
 		});
 	});
-
-
-	//store the events selected by members into members table
-	app.post("/register_complete", function(req, res){
-		events = {
-			event_appr: req.body.appr, 
-			event_trip: req.body.trip, 
-			event_pal: req.body.pal,
-			event_learn: req.body.learn
-		};
-
-		var qevent = `UPDATE members SET ? WHERE email = '${member.email}'`;
-		connection.query(qevent, events, function(error, results){
-			if (error) throw error;
-			res.render("complete");
-		});
-		
-	});
-
-	app.post("/register", function(req, res){
-		res.redirect("/register");
-	})
-
 });
+
+//store the events selected by members into members table
+app.post("/register_complete", function(req, res){
+	events = {
+		event_appr: req.body.appr, 
+		event_trip: req.body.trip, 
+		event_pal: req.body.pal,
+		event_learn: req.body.learn
+	};
+	console.log(primary_key);
+	var qevent = `UPDATE members SET ? WHERE email = '${primary_key}'`;
+	connection.query(qevent, events, function(error, results){
+		if (error) throw error;
+		res.render("complete");
+	});
+	
+});
+
+
+app.post("/register", function(req, res){
+	res.redirect("/register");
+})
 
 http.createServer(app).listen(80);
 
