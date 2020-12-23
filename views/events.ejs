@@ -9,26 +9,26 @@
         <h1>Welcome!</h1>
         <p class="lead">Please mark the events that interest you. </p>
         <br/><br/><br/><br/><br/>
-        <form method="POST" action='/events_marked'>
+        <form method="POST" action='/register_complete'>
             <label style="font-size:20px" for="appr">Poetry Appreciation (marked by <strong><%= count_appr %></strong>):</label>
-                <select id="events" name="events">
-                <option value="yes">I am interested</option>
-                <option value="no">No thanks</option>
+                <select id="appr" name="appr">
+                <option value=1>I am interested</option>
+                <option value=0>No thanks</option>
                 </select><br/><br/>
             <label style="font-size:20px" or="trip">Fieldship for Inspirations (marked by <strong><%= count_trip %></strong>)</label>
-                <select id="events" name="events">
-                <option value="yes">I am interested</option>
-                <option value="no">No thanks</option>
+                <select id="trip" name="trip">
+                <option value=1>I am interested</option>
+                <option value=0>No thanks</option>
                 </select><br/><br/>
             <label style="font-size:20px" for="pal">Finding a Poem Pal (marked by <strong><%= count_pal %></strong>)</label>
-                <select id="events" name="events">
-                <option value="yes">I am interested</option>
-                <option value="no">No thanks</option>
+                <select id="pal" name="pal">
+                <option value=1>I am interested</option>
+                <option value=0>No thanks</option>
                 </select><br/><br/>
             <label style="font-size:20px" for="learn">Learning to Write Chinese Poem (marked by <strong><%= count_learn %></strong>)</label>
-                <select id="events" name="events">
-                <option value="yes">I am interested</option>
-                <option value="no">No thanks</option>
+                <select id="learn" name="learn">
+                <option value=1>I am interested</option>
+                <option value=0>No thanks</option>
                 </select><br/><br/>
             <button>Mark</button>
         </form>

@@ -1,0 +1,47 @@
+body {
+    font-family: cursive;
+    text-align: center;
+    text-shadow: 0 .05rem .1rem rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.8);
+    background-image: url('https://imgur.com/opXpqNs.jpg'); 
+    background-size: cover;
+    font-weight: 100;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+h1{
+  margin: 0;
+  font-size: 60px;
+  line-height: 150px;
+  font-weight: 90;
+}
+
+p {
+  margin: 0;
+  font-size: 42px;
+}
+
+button {
+    font-family: cursive;
+    line-height: 2.0;
+    border:2px solid white;
+    font-size: 24px;
+    color: rgb(0, 0, 0);
+    padding: 5px 30px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 5px;
+}
+
+input[type=text]:focus {
+  outline: none;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgba(255,255,255,0.8);
+}
