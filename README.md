@@ -3,9 +3,9 @@ The project is to build a (basic) JOIN US web app using NodeJS and MySQL.
 
 ## Pages
 
-- `/register`: sign up for membership with email, name and age (new member added to MySQL database)
-- `/register_events`: mark the events interested (records associated with the member will be updated in database)
-- `register_complete`: registration complete message (with an option to redirect to `/register` page) 
+- `/register`: Sign up for membership with email, name and age. The page shows current total number of members, and the new member will be added to MySQL database immediately.
+- `/register_events`: The newly joined member should mark the events he/she is interested in. The page shows the total number of marks received by each event, and the record associated with the new member will be reflected immediately in database. 
+- `register_complete`: Display a message for completion of registration, with an option provided to redirect to `/register` page for another signing up. 
 
 
 ## Running the app
