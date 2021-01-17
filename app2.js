@@ -24,7 +24,7 @@ var connection = mysql.createConnection({
 });
 
 //homepage - register
-app.get("/register", function(req, res){
+app.get("/", function(req, res){
 	connection.query("SELECT COUNT(*) AS count FROM members;", 
 		function(error, results){
 		if (error) throw error;
@@ -103,11 +103,6 @@ app.post("/register_complete", function(req, res){
 	});
 	
 });
-
-
-app.post("/register", function(req, res){
-	res.redirect("/register");
-})
 
 http.createServer(app).listen(port);
 
