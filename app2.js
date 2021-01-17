@@ -7,13 +7,12 @@ var mysql = require('mysql');
 var express = require('express'); 
 var http = require('http');      
 var parser = require('body-parser');
-var cookieParser = require("cookie-parser");
+const port = process.env.PORT || 80;
 
 var app = express();
 app.set("view engine", "ejs"); //include html file
 app.use(parser.urlencoded({extended: true}));   //parse data from html body 
 app.use(express.static(__dirname + "/style"));  //include css file
-app.use(cookieParser());  //use cookie parser
 
 //build connection with mysql
 var connection = mysql.createConnection({
@@ -110,7 +109,7 @@ app.post("/register", function(req, res){
 	res.redirect("/register");
 })
 
-http.createServer(app).listen(80);
+http.createServer(app).listen(port);
 
 
 

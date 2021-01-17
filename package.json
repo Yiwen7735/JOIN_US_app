@@ -1,0 +1,32 @@
+{
+  "name": "join_us",
+  "version": "1.0.0",
+  "description": "The project is to build a JOIN US (email) app using NodeJS and SQL",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "faker": "^5.1.0",
+    "http": "0.0.1-security",
+    "https": "^1.0.0",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yiwen7735/JOIN_US_app.git"
+  },
+  "keywords": [],
+  "author": "Yiwen Zhu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yiwen7735/JOIN_US_app/issues"
+  },
+  "homepage": "https://github.com/Yiwen7735/JOIN_US_app#readme",
+  "scripts": {"start": "app2.js"}
+}
