@@ -19,9 +19,15 @@ Second, import some preliminary data generated using faker package by running:
 ```
 node app1.js
 ```
-
 Last, run command line:
 ```
 node app2.js
 ```
 and go to `http://localhost/` to register. 
+
+Alternatively, for mac and linux users run 
+```
+./run.sh
+```
+However, this resets the database everytime. 
+
