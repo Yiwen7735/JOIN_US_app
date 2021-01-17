@@ -28,5 +28,5 @@
     "url": "https://github.com/Yiwen7735/JOIN_US_app/issues"
   },
   "homepage": "https://github.com/Yiwen7735/JOIN_US_app#readme",
-  "scripts": {"start": "app2.js"}
+  "scripts": {"start": "node app2.js"}
 }
