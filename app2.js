@@ -2,6 +2,7 @@
 This is the 'main' file that
 displays homepage, takes user input & updates sql database
 */
+
 //packages required
 var mysql = require('mysql'); 
 var express = require('express'); 
@@ -16,7 +17,7 @@ app.use(express.static(__dirname + "/style"));  //include css file
 
 //build connection with mysql
 var connection = mysql.createConnection({
-	host: 'localhost',
+	host: '35.237.49.11',
 	user: 'root', 
 	password: process.env.mysql_pw, 
 	database: 'join_us', 

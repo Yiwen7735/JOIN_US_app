@@ -21,7 +21,7 @@ function gen(){
 // insert a specific number of fake data to join_us database
 var num_fake = 62;
 var connection = mysql.createConnection({
-	host: 'localhost',
+	host: '35.237.49.11',
 	user: 'root', 
 	password: process.env.mysql_pw, 
 	database: 'join_us'
