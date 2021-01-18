@@ -4,10 +4,9 @@ displays homepage, takes user input & updates sql database
 */
 
 //packages required
-var mysql = require('mysql'); 
-var express = require('express'); 
-var http = require('http');      
-var parser = require('body-parser');
+const mysql = require('mysql'); 
+const express = require('express');    
+const parser = require('body-parser');
 const port = process.env.PORT || 80;
 
 var app = express();
@@ -19,10 +18,12 @@ app.use(express.static(__dirname + "/style"));  //include css file
 var connection = mysql.createConnection({
 	host: '35.237.49.11',
 	user: 'root', 
-	password: process.env.mysql_pw, 
+	password: '197735Wx', 
 	database: 'join_us', 
 	multipleStatements: true
 });
+
+connection.connect();
 
 //homepage - register
 app.get("/", function(req, res){
@@ -105,7 +106,7 @@ app.post("/register_complete", function(req, res){
 	
 });
 
-http.createServer(app).listen(port);
+app.listen(port);
 
 
 
