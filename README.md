@@ -1,5 +1,5 @@
 # JOIN_US_app
-The project is to build a (basic) JOIN US web app using NodeJS and MySQL. 
+The project is to build a (basic) JOIN US web app using NodeJS and MySQL. <br/>
 Data for this project are randomly generated using `faker` package and hosted on Google Cloud Platform (Cloud SQL).
 
 ## Pages
@@ -29,5 +29,8 @@ Alternatively, for mac and linux users run
 ```
 ./run.sh
 ```
-However, this resets the database everytime. 
+However, this resets the database everytime.
+
+## Tryout Link
+https://sign-up-chinese-poetry-society.herokuapp.com
 
